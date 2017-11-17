@@ -37,3 +37,17 @@ print("\n{}\n{}".format(train_df.describe(), SEPARATOR))
 
 # distribution of categorical features
 print("\n{}\n{}".format(train_df.describe(include=['O']), SEPARATOR))
+
+# analyze Pclass feature
+print("\n{}\n{}".format(train_df[['Pclass', 'Survived']].groupby(['Pclass'], as_index=False).mean()
+                        .sort_values(by='Survived', ascending=False), SEPARATOR))
+# analyze Sex feature
+print("\n{}\n{}".format(train_df[['Sex', 'Survived']].groupby(['Sex'], as_index=False).mean()
+                        .sort_values(by='Survived', ascending=False), SEPARATOR))
+# analyze Sib/Sp feature
+print("\n{}\n{}".format(train_df[['SibSp', 'Survived']].groupby(['SibSp'], as_index=False).mean()
+                        .sort_values(by='Survived', ascending=False), SEPARATOR))
+# analyze Parch feature
+print("\n{}\n{}".format(train_df[['Parch', 'Survived']].groupby(['Parch'], as_index=False).mean()
+                        .sort_values(by='Survived', ascending=False), SEPARATOR))
+
