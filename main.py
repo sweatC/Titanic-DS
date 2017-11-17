@@ -51,3 +51,25 @@ print("\n{}\n{}".format(train_df[['SibSp', 'Survived']].groupby(['SibSp'], as_in
 print("\n{}\n{}".format(train_df[['Parch', 'Survived']].groupby(['Parch'], as_index=False).mean()
                         .sort_values(by='Survived', ascending=False), SEPARATOR))
 
+# correlating numerical features
+grid = sns.FacetGrid(train_df, col='Survived')
+grid.map(plt.hist, 'Age', bins=20)
+plt.show()
+
+# correlating numerical and ordinal features
+grid = sns.FacetGrid(train_df, col='Survived', row='Pclass', size=2.2, aspect=1.6)
+grid.map(plt.hist, 'Age', alpha=.5, bins=20)
+grid.add_legend()
+plt.show()
+
+# correlating categorical features
+grid = sns.FacetGrid(train_df, row='Embarked', size=2.2, aspect=1.6)
+grid.map(sns.pointplot, 'Pclass', 'Survived', 'Sex', palette='deep')
+grid.add_legend()
+plt.show()
+
+# correlating categorical and numerical features
+grid = sns.FacetGrid(train_df, row='Embarked', col='Survived', size=2.2, aspect=1.6)
+grid.map(sns.barplot, 'Sex', 'Fare', alpha=.5, ci=None)
+grid.add_legend()
+plt.show()
