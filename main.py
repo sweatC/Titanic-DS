@@ -87,4 +87,12 @@ print(SEPARATOR)
 for dataset in combine:
     dataset['Title'] = dataset.Name.str.extract(' ([A-Za-z]+)\.', expand=False)
 
-print("Title feature:\n{}".format(pd.crosstab(train_df['Title'], train_df['Sex'])))
+print("Title feature:\n{}\n{}".format(pd.crosstab(train_df['Title'], train_df['Sex']), SEPARATOR))
+
+for dataset in combine:
+    dataset["Title"] = dataset["Title"].replace(['Don', 'Lady', 'Countess', 'Capt', 'Col', 'Don',
+                                                 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer', 'Dona'], "Rare")
+
+print("Correlation between Title and Survived:\n{}\n{}".format(
+    train_df[["Title", "Survived"]].groupby(["Title"], as_index=False).mean(), SEPARATOR))
+
