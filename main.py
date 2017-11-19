@@ -82,3 +82,9 @@ test_df = test_df.drop(['Ticket', 'Cabin'], axis=1)
 combine = [train_df, test_df]
 
 print("After", train_df.shape, test_df.shape, combine[0].shape, combine[1].shape)
+print(SEPARATOR)
+
+for dataset in combine:
+    dataset['Title'] = dataset.Name.str.extract(' ([A-Za-z]+)\.', expand=False)
+
+print("Title feature:\n{}".format(pd.crosstab(train_df['Title'], train_df['Sex'])))
