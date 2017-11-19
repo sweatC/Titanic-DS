@@ -54,22 +54,31 @@ print("\n{}\n{}".format(train_df[['Parch', 'Survived']].groupby(['Parch'], as_in
 # correlating numerical features
 grid = sns.FacetGrid(train_df, col='Survived')
 grid.map(plt.hist, 'Age', bins=20)
-plt.show()
+# plt.show()
 
 # correlating numerical and ordinal features
 grid = sns.FacetGrid(train_df, col='Survived', row='Pclass', size=2.2, aspect=1.6)
 grid.map(plt.hist, 'Age', alpha=.5, bins=20)
 grid.add_legend()
-plt.show()
+# plt.show()
 
 # correlating categorical features
 grid = sns.FacetGrid(train_df, row='Embarked', size=2.2, aspect=1.6)
 grid.map(sns.pointplot, 'Pclass', 'Survived', 'Sex', palette='deep')
 grid.add_legend()
-plt.show()
+# plt.show()
 
 # correlating categorical and numerical features
 grid = sns.FacetGrid(train_df, row='Embarked', col='Survived', size=2.2, aspect=1.6)
 grid.map(sns.barplot, 'Sex', 'Fare', alpha=.5, ci=None)
 grid.add_legend()
-plt.show()
+# plt.show()
+
+# correcting by dropping features
+print("Before", train_df.shape, test_df.shape, combine[0].shape, combine[1].shape)
+
+train_df = train_df.drop(['Ticket', 'Cabin'], axis=1)
+test_df = test_df.drop(['Ticket', 'Cabin'], axis=1)
+combine = [train_df, test_df]
+
+print("After", train_df.shape, test_df.shape, combine[0].shape, combine[1].shape)
