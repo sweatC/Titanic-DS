@@ -96,3 +96,11 @@ for dataset in combine:
 print("Correlation between Title and Survived:\n{}\n{}".format(
     train_df[["Title", "Survived"]].groupby(["Title"], as_index=False).mean(), SEPARATOR))
 
+# converting categorical titles to ordinal
+title_mapping = {"Mr": 1, "Miss": 2, "Mrs": 3, "Master": 4, "Rare": 5}
+for dataset in combine:
+    dataset["Title"] = dataset["Title"].map(title_mapping)
+    dataset["Title"] = dataset["Title"].fillna(0)
+
+print("After convertation:\n{}\n{}".format(train_df.head(), SEPARATOR))
+
