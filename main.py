@@ -104,3 +104,8 @@ for dataset in combine:
 
 print("After convertation:\n{}\n{}".format(train_df.head(), SEPARATOR))
 
+# dropping out Name and PassengerId features
+train_df = train_df.drop(["Name", "PassengerId"], axis=1)
+test_df = test_df.drop(["Name"], axis=1)
+combine = [train_df, test_df]
+print("Shapes after dropping:\ntraining set {}\ntest set {}\n{}".format(train_df.shape, test_df.shape, SEPARATOR))
